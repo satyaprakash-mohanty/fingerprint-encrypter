@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fingerprint Encrypter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&display=swap');body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoBHO0Y4P5KKWwCH0nti_zG7A7G2GGYdZWzym9rE6N4q1uNvldI3Yx8OoUiwq1bhPx1izbFty5gcSiWyK70x5RqRtcBJxmPX3UCRgfTfsbi5AxLRDJUxGjOM0U_rD03JRQh8oD0X5K71ukafv_PH6GUbeNreroFebRPX68B3yZyE_k0ejgid6QXcg7JUEs/s1536/1000024793.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+header img {
+  height: 100px;
+  margin-right: 20px;
+}
+header h1 {
+  font-family: 'Gothic A1', sans-serif;
+  font-size: 40px;
+  margin: 0;
+}
+header p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 5px 0 0 120px;
+}
+.start-button {
+  margin-top: 50px;
+}
+.start-button img {
+  width: 250px;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+.page2 {
+  margin-top: 50px;
+}
+.upload-section input {
+  display: block;
+  margin: 20px auto;
+}
+.encrypt-button img {
+  width: 200px;
+  cursor: pointer;
+}
+.fake-file {
+  margin-top: 20px;
+  color: yellow;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEir2RQGX6cZVnGL1X_APwA_bDCWp33pxFFOM70EE7aLcfsaecOwHZTL9kg7XyxjKC9mIugLZTMf3TEaQIXmhHxHDtT0Q1x3kANMyvScyUZJvi0EEPxviowk-0ue3b3__K0DEsYyVaIfFa1XPgYDxxFS4MVH8YOcm-pPU03fFQz50qjS4uJhLcCzhdlJVMYD/s1024/1000024792.png" alt="Logo">
+    <div>
+      <h1>Fingerprint Encrypter</h1>
+      <p>Encrypt your files using your fingerprint. (Totally secure... we promise!)</p>
+    </div>
+  </header>  <div class="start-button">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRae_zOhHW4xy2iJVRxo5L-iEgtJQ47GbAQXbkQFPy3BZYriLFJoxDsVH_tUSSj0w6Db8aOTWQhoOwIWXGl736VXLMFurgiZdqoGXYGKTbQ43aCkQrOwcmlAu75k_wbHcO8p91aH_Vf4Bg7W2AS-aOk8d1xrH9dMaxTri3Emfslm1dkRk3Kics9hIUD0_k/s500/1000024795.png" alt="Get Started" onclick="showPage2()">
+  </div>  <div class="page2 hidden" id="page2">
+    <div class="upload-section">
+      <h2>Select File to Encrypt</h2>
+      <input type="file" id="mainFile"><h2>Upload Your Fingerprint File</h2>
+  <input type="file" id="fingerprintFile">
+</div>
+
+<div class="encrypt-button">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjczOXnhF5aXpg9ElfsnxUzf6GDBtl9vV648FIbipDnzKLv3VXAwX7O_-lspSjUaDK6SUxjCxJ-9NQ11g2FNoUkYh9l_fgyLdWUSN9MJmNknT3EVIWOq7b3Em_2aS_wUNQw6LTtK3WLKmTvqT07uwQxXZsD37KA1wnxRlUS-YCV8HtZoOW_UJBuhvAQp4LZ/s1024/1000024796.png" alt="Encrypt" onclick="encryptFile()">
+</div>
+
+<div class="fake-file" id="downloadLink"></div>
+
+  </div>  <script>
+    function showPage2() {
+      document.querySelector('.start-button').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    }
+
+    function encryptFile() {
+      const mainFile = document.getElementById('mainFile').files[0];
+      const fingerprintFile = document.getElementById('fingerprintFile').files[0];
+
+      if (!mainFile || !fingerprintFile) {
+        alert('Please select both files.');
+        return;
+      }
+
+      setTimeout(() => {
+        const fakeBlob = new Blob(["This is a prank encrypted file!"], { type: "application/octet-stream" });
+        const url = URL.createObjectURL(fakeBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = "encrypted.fprank";
+        link.textContent = "Download Encrypted File";
+        link.style.color = "lime";
+
+        const downloadDiv = document.getElementById('downloadLink');
+        downloadDiv.innerHTML = "";
+        downloadDiv.appendChild(link);
+      }, 1000);
+    }
+  </script></body>
+</html>
